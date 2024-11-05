@@ -1,8 +1,8 @@
 #include "AlienInvasion.hpp"
 
-AlienInvasion::AlienInvasion()
+AlienInvasion::AlienInvasion() : settings(Settings())
 {
-    window.create({1200, 800}, "Alien Invasion");
+    window.create({settings.screenWidth, settings.screenHeight}, "Alien Invasion");
     window.setFramerateLimit(144);
 
     if (!shipTexture.loadFromFile("assets/ship.png"))
@@ -54,7 +54,7 @@ void AlienInvasion::update()
 
 void AlienInvasion::render()
 {
-    window.clear(sf::Color::Black);
+    window.clear(settings.bgColor);
     _ship->render();
     window.display();
 }

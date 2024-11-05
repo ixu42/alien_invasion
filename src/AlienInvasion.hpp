@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
+#include "Settings.hpp"
 #include "Ship.hpp"
 
 class Ship;
@@ -15,6 +16,7 @@ class AlienInvasion
 
         sf::RenderWindow window;
         sf::Texture shipTexture;
+        Settings settings;
 
     private:
         void processEvents();

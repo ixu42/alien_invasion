@@ -13,7 +13,7 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(alien_invasion src/main.cpp src/AlienInvasion.cpp src/Ship.cpp)
+add_executable(alien_invasion src/main.cpp src/AlienInvasion.cpp src/Settings.cpp src/Ship.cpp)
 target_link_libraries(alien_invasion PRIVATE sfml-graphics)
 target_compile_features(alien_invasion PRIVATE cxx_std_17)
 

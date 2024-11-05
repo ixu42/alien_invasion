@@ -9,9 +9,15 @@ Ship::Ship(AlienInvasion* game) : movingLeft(false), movingRight(false), _game(g
 void Ship::update()
 {
     if (movingLeft)
-        sprite.move(-_game->settings.shipSpeed, 0);
+    {
+        if (sprite.getPosition().x > 0)
+            sprite.move(-_game->settings.shipSpeed, 0);
+    }
     if (movingRight)
-        sprite.move(_game->settings.shipSpeed, 0);
+    {
+        if (sprite.getPosition().x + sprite.getGlobalBounds().width < _game->window.getSize().x)
+            sprite.move(_game->settings.shipSpeed, 0);
+    }
 }
 
 void Ship::render()

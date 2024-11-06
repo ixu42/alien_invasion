@@ -21,13 +21,20 @@ class AlienInvasion
         sf::RenderWindow window;
         Settings settings;
         std::unique_ptr<Ship> ship;
-        std::unique_ptr<Alien> alien;
         std::vector<Bullet> bullets;
+        std::vector<std::unique_ptr<Alien>> aliens;
+        
+        sf::Texture alienTexture;
 
     private:
         void processEvents();
         void update();
         void render();
+
+        // helper functions for handling bullets
         void fireBullet();
         void updateBullets();
+
+        // create the fleet of aliens
+        void create_fleet();
 };

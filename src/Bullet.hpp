@@ -9,6 +9,7 @@ class Bullet : public sf::RectangleShape
 {
     public:
         Bullet(AlienInvasion* game);
+        Bullet(const Bullet& other);
         void update();
         void draw() const;
 

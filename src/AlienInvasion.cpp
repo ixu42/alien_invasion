@@ -5,8 +5,11 @@ AlienInvasion::AlienInvasion() : settings(Settings())
     window.create({settings.screenWidth, settings.screenHeight}, "Alien Invasion");
     window.setFramerateLimit(144);
 
+    if (!alienTexture.loadFromFile("assets/alien.png"))
+        throw std::runtime_error("Failed to load alien texture");
+
     ship = std::make_unique<Ship>(this);
-    alien = std::make_unique<Alien>(this);
+    create_fleet();
 }
 
 void AlienInvasion::run()
@@ -51,7 +54,8 @@ void AlienInvasion::update()
 {
     ship->update();
     updateBullets();
-    alien->update();
+    for (auto& alien : aliens)
+        alien->update();
 }
 
 void AlienInvasion::render()
@@ -60,7 +64,8 @@ void AlienInvasion::render()
     ship->render();
     for (Bullet& bullet : bullets)
         bullet.draw();
-    alien->render();
+    for (auto& alien : aliens)
+        alien->render();
     window.display();
 }
 
@@ -85,4 +90,22 @@ void AlienInvasion::updateBullets()
         else
             ++it;
     }
+}
+
+void AlienInvasion::create_fleet()
+{
+    // create an alien and find the number of aliens that fit in a row
+    Alien tempAlien(this);
+    auto alienWidth = tempAlien.getGlobalBounds().width;
+    auto avalableSpaceX = settings.screenWidth - 2 * alienWidth;
+    unsigned int numberOfAliensX = avalableSpaceX / (2 * alienWidth);
+
+    // create the first row of aliens
+    for (int i = 0; i < numberOfAliensX; ++i)
+    {
+        auto newAlien = std::make_unique<Alien>(this);
+        newAlien->setPosition(alienWidth + 2 * alienWidth * i, newAlien->getGlobalBounds().height);
+        aliens.push_back(std::move(newAlien));
+    }
+    std::cout << "Number of aliens: " << aliens.size() << std::endl;
 }

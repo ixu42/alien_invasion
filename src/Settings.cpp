@@ -9,6 +9,9 @@ Settings::Settings()
       bulletWidth(3),
       bulletHeight(12),
       bulletColor(sf::Color::White),
-      bulletMaxCount(5)
+      bulletMaxCount(5),
+      alienSpeed(1),
+      fleetDropSpeed(10),
+      fleetDirection(1) // 1 represents right, -1 represents left
 {
 }

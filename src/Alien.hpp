@@ -13,6 +13,7 @@ class Alien : public sf::Sprite
         Alien(const Alien& other);
         void update();
         void render() const;
+        bool reachedEdge();
     
     private:
         AlienInvasion*  _game;

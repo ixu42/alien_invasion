@@ -14,10 +14,18 @@ Alien::Alien(const Alien& other) : _game(other._game)
 
 void Alien::update()
 {
-    // this->move(0.1, 0);
+    this->move(_game->settings.alienSpeed * _game->settings.fleetDirection, 0);
 }
 
 void Alien::render() const
 {
     _game->window.draw(*this);
+}
+
+bool Alien::reachedEdge()
+{
+    if (this->getPosition().x <= 0
+        || this->getPosition().x >= _game->settings.screenWidth - this->getGlobalBounds().width)
+        return true;
+    return false;
 }

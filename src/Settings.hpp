@@ -21,4 +21,9 @@ class Settings
         unsigned int    bulletHeight;
         sf::Color       bulletColor;
         unsigned int    bulletMaxCount;
+
+        // alien settings
+        float           alienSpeed;
+        float           fleetDropSpeed;
+        int             fleetDirection;
 };

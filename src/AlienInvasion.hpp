@@ -37,4 +37,6 @@ class AlienInvasion
 
         // create the fleet of aliens
         void create_fleet();
+        void checkFleetEdges();
+        void changeFleetDirection();
 };

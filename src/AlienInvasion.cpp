@@ -54,6 +54,7 @@ void AlienInvasion::update()
 {
     ship->update();
     updateBullets();
+    checkFleetEdges();
     for (auto& alien : aliens)
         alien->update();
 }
@@ -116,4 +117,23 @@ void AlienInvasion::create_fleet()
             aliens.push_back(std::move(newAlien));
         }
     }
+}
+
+void AlienInvasion::checkFleetEdges()
+{
+    for (auto& alien : aliens)
+    {
+        if (alien->reachedEdge())
+        {
+            changeFleetDirection();
+            break;
+        }
+    }
+}
+
+void AlienInvasion::changeFleetDirection()
+{
+    settings.fleetDirection *= -1;
+    for (auto& alien : aliens)
+        alien->move(0, settings.fleetDropSpeed);
 }

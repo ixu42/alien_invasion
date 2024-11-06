@@ -7,8 +7,17 @@ class Settings
     public:
         Settings();
 
+        // screen settings
         unsigned int    screenWidth;
         unsigned int    screenHeight;
         sf::Color       bgColor;
+
+        // ship settings
         float           shipSpeed;
+
+        // bullet settings
+        float           bulletSpeed;
+        unsigned int    bulletWidth;
+        unsigned int    bulletHeight;
+        sf::Color       bulletColor;
 };

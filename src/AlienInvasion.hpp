@@ -5,8 +5,10 @@
 #include <memory>
 #include "Settings.hpp"
 #include "Ship.hpp"
+#include "Bullet.hpp"
 
 class Ship;
+class Bullet;
 
 class AlienInvasion
 {
@@ -17,11 +19,12 @@ class AlienInvasion
         sf::RenderWindow window;
         sf::Texture shipTexture;
         Settings settings;
+        std::unique_ptr<Ship> ship;
+        std::vector<Bullet> bullets;
 
     private:
         void processEvents();
         void update();
         void render();
-
-        std::unique_ptr<Ship> _ship;
+        void fireBullet();
 };

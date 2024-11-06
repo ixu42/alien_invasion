@@ -5,16 +5,12 @@
 
 class AlienInvasion;
 
-class Ship
+class Bullet : public sf::RectangleShape
 {
     public:
-        Ship(AlienInvasion* game);
+        Bullet(AlienInvasion* game);
         void update();
-        void render() const;
-
-        sf::Sprite sprite;
-        bool movingLeft;
-        bool movingRight;
+        void draw() const;
 
     private:
         AlienInvasion* _game;

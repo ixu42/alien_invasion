@@ -20,7 +20,7 @@ void Ship::update()
     }
 }
 
-void Ship::render()
+void Ship::render() const
 {
     _game->window.draw(sprite);
 }

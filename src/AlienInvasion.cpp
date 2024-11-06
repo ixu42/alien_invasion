@@ -8,7 +8,7 @@ AlienInvasion::AlienInvasion() : settings(Settings())
     if (!shipTexture.loadFromFile("assets/ship.png"))
         std::cout << "Error loading texture\n";
 
-    _ship = std::make_unique<Ship>(this);
+    ship = std::make_unique<Ship>(this);
 }
 
 void AlienInvasion::run()
@@ -33,28 +33,40 @@ void AlienInvasion::processEvents()
             if (event.key.code == sf::Keyboard::Escape)
                 window.close();
             if (event.key.code == sf::Keyboard::Left)
-                _ship->movingLeft = true;
+                ship->movingLeft = true;
             if (event.key.code == sf::Keyboard::Right)
-                _ship->movingRight = true;
+                ship->movingRight = true;
+            if (event.key.code == sf::Keyboard::Space)
+                fireBullet();
         }
         if (event.type == sf::Event::KeyReleased)
         {
             if (event.key.code == sf::Keyboard::Left)
-                _ship->movingLeft = false;
+                ship->movingLeft = false;
             if (event.key.code == sf::Keyboard::Right)
-                _ship->movingRight = false;
+                ship->movingRight = false;
         }
     }
 }
 
 void AlienInvasion::update()
 {
-    _ship->update();
+    ship->update();
+    for (Bullet& bullet : bullets)
+        bullet.update();
 }
 
 void AlienInvasion::render()
 {
     window.clear(settings.bgColor);
-    _ship->render();
+    ship->render();
+    for (Bullet& bullet : bullets)
+        bullet.draw();
     window.display();
+}
+
+void AlienInvasion::fireBullet()
+{
+    Bullet newBullet(this);
+    bullets.push_back(newBullet);
 }

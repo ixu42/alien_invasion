@@ -96,16 +96,24 @@ void AlienInvasion::create_fleet()
 {
     // create an alien and find the number of aliens that fit in a row
     Alien tempAlien(this);
-    auto alienWidth = tempAlien.getGlobalBounds().width;
-    auto avalableSpaceX = settings.screenWidth - 2 * alienWidth;
+    float alienWidth = tempAlien.getGlobalBounds().width;
+    float alienHeight = tempAlien.getGlobalBounds().height;
+    float avalableSpaceX = settings.screenWidth - 2 * alienWidth;
     unsigned int numberOfAliensX = avalableSpaceX / (2 * alienWidth);
 
-    // create the first row of aliens
+    // determine the number of rows of aliens that fit on the screen
+    float shipHeight = ship->sprite.getGlobalBounds().height;
+    float availableSpaceY = settings.screenHeight - 6 * alienHeight - shipHeight;
+    unsigned int numberOfAliensY = availableSpaceY / (3 * alienHeight);
+
+    // create full fleet of aliens
     for (int i = 0; i < numberOfAliensX; ++i)
     {
-        auto newAlien = std::make_unique<Alien>(this);
-        newAlien->setPosition(alienWidth + 2 * alienWidth * i, newAlien->getGlobalBounds().height);
-        aliens.push_back(std::move(newAlien));
+        for (int j = 0; j < numberOfAliensY; ++j)
+        {
+            auto newAlien = std::make_unique<Alien>(this);
+            newAlien->setPosition(alienWidth + 2 * alienWidth * i, alienHeight + 3 * alienHeight * j);
+            aliens.push_back(std::move(newAlien));
+        }
     }
-    std::cout << "Number of aliens: " << aliens.size() << std::endl;
 }

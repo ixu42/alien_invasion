@@ -54,6 +54,16 @@ void AlienInvasion::update()
     ship->update();
     for (Bullet& bullet : bullets)
         bullet.update();
+
+    // get rid of bullets that have gone off screen
+    for (auto it = bullets.begin(); it != bullets.end();)
+    {
+        if (it->getPosition().y + it->getSize().y <= 0)
+            it = bullets.erase(it);
+        else
+            ++it;
+    }
+    // std::cout << "number of bullets: " << bullets.size() << std::endl;
 }
 
 void AlienInvasion::render()

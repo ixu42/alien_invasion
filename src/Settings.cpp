@@ -8,6 +8,7 @@ Settings::Settings()
       bulletSpeed(5),
       bulletWidth(3),
       bulletHeight(12),
-      bulletColor(sf::Color::White)
+      bulletColor(sf::Color::White),
+      bulletMaxCount(5)
 {
 }

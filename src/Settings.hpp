@@ -20,4 +20,5 @@ class Settings
         unsigned int    bulletWidth;
         unsigned int    bulletHeight;
         sf::Color       bulletColor;
+        unsigned int    bulletMaxCount;
 };

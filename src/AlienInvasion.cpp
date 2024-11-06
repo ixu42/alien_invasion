@@ -63,7 +63,6 @@ void AlienInvasion::update()
         else
             ++it;
     }
-    // std::cout << "number of bullets: " << bullets.size() << std::endl;
 }
 
 void AlienInvasion::render()
@@ -77,6 +76,8 @@ void AlienInvasion::render()
 
 void AlienInvasion::fireBullet()
 {
+    if (bullets.size() >= settings.bulletMaxCount)
+        return;
     Bullet newBullet(this);
     bullets.push_back(newBullet);
 }

@@ -52,17 +52,7 @@ void AlienInvasion::processEvents()
 void AlienInvasion::update()
 {
     ship->update();
-    for (Bullet& bullet : bullets)
-        bullet.update();
-
-    // get rid of bullets that have gone off screen
-    for (auto it = bullets.begin(); it != bullets.end();)
-    {
-        if (it->getPosition().y + it->getSize().y <= 0)
-            it = bullets.erase(it);
-        else
-            ++it;
-    }
+    updateBullets();    
 }
 
 void AlienInvasion::render()
@@ -80,4 +70,19 @@ void AlienInvasion::fireBullet()
         return;
     Bullet newBullet(this);
     bullets.push_back(newBullet);
+}
+
+void AlienInvasion::updateBullets()
+{
+    for (Bullet& bullet : bullets)
+        bullet.update();
+
+    // get rid of bullets that have gone off screen
+    for (auto it = bullets.begin(); it != bullets.end();)
+    {
+        if (it->getPosition().y + it->getSize().y <= 0)
+            it = bullets.erase(it);
+        else
+            ++it;
+    }
 }

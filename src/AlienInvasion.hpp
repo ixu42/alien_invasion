@@ -27,4 +27,5 @@ class AlienInvasion
         void update();
         void render();
         void fireBullet();
+        void updateBullets();
 };

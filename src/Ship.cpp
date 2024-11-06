@@ -2,7 +2,10 @@
 
 Ship::Ship(AlienInvasion* game) : movingLeft(false), movingRight(false), _game(game)
 {
-    sprite.setTexture(_game->shipTexture);
+    if (!_shipTexture.loadFromFile("assets/ship.png"))
+        throw std::runtime_error("Error loading texture");
+    sprite.setTexture(_shipTexture);
+
     sprite.setPosition(sf::Vector2f((_game->window.getSize().x - sprite.getGlobalBounds().width) / 2, _game->window.getSize().y - sprite.getGlobalBounds().height));
 }
 

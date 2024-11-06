@@ -5,10 +5,8 @@ AlienInvasion::AlienInvasion() : settings(Settings())
     window.create({settings.screenWidth, settings.screenHeight}, "Alien Invasion");
     window.setFramerateLimit(144);
 
-    if (!shipTexture.loadFromFile("assets/ship.png"))
-        std::cout << "Error loading texture\n";
-
     ship = std::make_unique<Ship>(this);
+    alien = std::make_unique<Alien>(this);
 }
 
 void AlienInvasion::run()
@@ -52,7 +50,8 @@ void AlienInvasion::processEvents()
 void AlienInvasion::update()
 {
     ship->update();
-    updateBullets();    
+    updateBullets();
+    alien->update();
 }
 
 void AlienInvasion::render()
@@ -61,6 +60,7 @@ void AlienInvasion::render()
     ship->render();
     for (Bullet& bullet : bullets)
         bullet.draw();
+    alien->render();
     window.display();
 }
 

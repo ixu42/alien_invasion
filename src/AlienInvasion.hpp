@@ -6,9 +6,11 @@
 #include "Settings.hpp"
 #include "Ship.hpp"
 #include "Bullet.hpp"
+#include "Alien.hpp"
 
 class Ship;
 class Bullet;
+class Alien;
 
 class AlienInvasion
 {
@@ -17,9 +19,9 @@ class AlienInvasion
         void run();
 
         sf::RenderWindow window;
-        sf::Texture shipTexture;
         Settings settings;
         std::unique_ptr<Ship> ship;
+        std::unique_ptr<Alien> alien;
         std::vector<Bullet> bullets;
 
     private:

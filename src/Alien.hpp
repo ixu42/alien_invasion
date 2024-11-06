@@ -6,18 +6,14 @@
 
 class AlienInvasion;
 
-class Ship
+class Alien : sf::Sprite
 {
     public:
-        Ship(AlienInvasion* game);
+        Alien(AlienInvasion* game);
         void update();
         void render() const;
-
-        sf::Sprite sprite;
-        bool movingLeft;
-        bool movingRight;
-
+    
     private:
         AlienInvasion*  _game;
-        sf::Texture     _shipTexture;
+        sf::Texture     _alienTexture;
 };

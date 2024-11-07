@@ -1,11 +1,12 @@
 #include "AlienInvasion.hpp"
 
-AlienInvasion::AlienInvasion() : settings(Settings()), stats(GameStats(this))
+AlienInvasion::AlienInvasion() 
+    : settings(Settings()), stats(GameStats(this)), playButton(PlayButton(this))
 {
     window.create({settings.screenWidth, settings.screenHeight}, "Alien Invasion");
     window.setFramerateLimit(144);
 
-    if (!alienTexture.loadFromFile("assets/alien.png"))
+    if (!alienTexture.loadFromFile("assets/images/alien.png"))
         throw std::runtime_error("Failed to load alien texture");
 
     ship = std::make_unique<Ship>(this);
@@ -79,6 +80,8 @@ void AlienInvasion::render()
         bullet.draw();
     for (auto& alien : aliens)
         alien->render();
+    if (!stats.gameActive)
+        playButton.draw();
     window.display();
 }
 

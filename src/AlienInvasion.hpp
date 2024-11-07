@@ -10,10 +10,12 @@
 #include "Ship.hpp"
 #include "Bullet.hpp"
 #include "Alien.hpp"
+#include "PlayButton.hpp"
 
 class Ship;
 class Bullet;
 class Alien;
+class PlayButton;
 
 class AlienInvasion
 {
@@ -24,12 +26,12 @@ class AlienInvasion
         sf::RenderWindow window;
         Settings settings;
         GameStats stats;
+        PlayButton playButton;
         std::unique_ptr<Ship> ship;
         std::vector<Bullet> bullets;
         std::vector<std::unique_ptr<Alien>> aliens;
         
         sf::Texture alienTexture;
-
 
     private:
         void processEvents();

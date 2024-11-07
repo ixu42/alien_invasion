@@ -62,6 +62,7 @@ void AlienInvasion::processEvents()
                 bullets.clear();
                 create_fleet();
                 ship->centerShip();
+                window.setMouseCursorVisible(false);
             }
         }
     }
@@ -222,6 +223,7 @@ void AlienInvasion::shipHit()
     else
     {
         stats.gameActive = false;
+        window.setMouseCursorVisible(true);
         std::cout << "Game over\n";
     }
 }

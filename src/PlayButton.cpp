@@ -22,11 +22,6 @@ PlayButton::PlayButton(AlienInvasion* game) : _game(game), _settings(game->setti
     _buttonText.setCharacterSize(32);
     _buttonText.setFillColor(sf::Color::White);
 
-    std::cout << "Button text left: " << _buttonText.getLocalBounds().left << std::endl;
-    std::cout << "Button text top: " << _buttonText.getLocalBounds().top << std::endl;
-    std::cout << "Button text width: " << _buttonText.getLocalBounds().width << std::endl;
-    std::cout << "Button text height: " << _buttonText.getLocalBounds().height << std::endl;
-
     // center the text within the button
     sf::FloatRect textBounds = _buttonText.getLocalBounds();
     _buttonText.setOrigin(textBounds.left + textBounds.width / 2, 

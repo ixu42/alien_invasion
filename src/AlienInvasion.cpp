@@ -112,6 +112,13 @@ void AlienInvasion::updateBullets()
         else
             ++bulletIter;
     }
+
+    // if the fleet is destroyed, destroy existing bullets and create a new fleet
+    if (aliens.empty())
+    {
+        bullets.clear();
+        create_fleet();
+    }
 }
 
 void AlienInvasion::create_fleet()

@@ -7,6 +7,7 @@
 #include <utility>
 #include "Settings.hpp"
 #include "GameStats.hpp"
+#include "Scoreboard.hpp"
 #include "Ship.hpp"
 #include "Bullet.hpp"
 #include "Alien.hpp"
@@ -26,6 +27,7 @@ class AlienInvasion
         sf::RenderWindow window;
         Settings settings;
         GameStats stats;
+        Scoreboard scoreboard;
         PlayButton playButton;
         std::unique_ptr<Ship> ship;
         std::vector<Bullet> bullets;

@@ -17,7 +17,16 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(SFML)
 
-add_executable(alien_invasion src/main.cpp src/AlienInvasion.cpp src/Settings.cpp src/GameStats.cpp src/PlayButton.cpp src/Ship.cpp src/Bullet.cpp src/Alien.cpp)
+add_executable(alien_invasion
+    src/main.cpp
+    src/AlienInvasion.cpp
+    src/Ship.cpp
+    src/Bullet.cpp
+    src/Alien.cpp
+    src/Settings.cpp
+    src/GameStats.cpp
+    src/PlayButton.cpp
+    src/Scoreboard.cpp)
 target_link_libraries(alien_invasion PRIVATE sfml-graphics)
 
 target_compile_features(alien_invasion PRIVATE cxx_std_17)

@@ -1,7 +1,8 @@
 #include "AlienInvasion.hpp"
 
 AlienInvasion::AlienInvasion() 
-    : settings(Settings()), stats(GameStats(this)), playButton(PlayButton(this))
+    : settings(Settings()), stats(GameStats(this)), playButton(PlayButton(this)),
+      scoreboard(Scoreboard(this))
 {
     window.create({settings.screenWidth, settings.screenHeight}, "Alien Invasion");
     window.setFramerateLimit(144);
@@ -89,6 +90,7 @@ void AlienInvasion::render()
         bullet.draw();
     for (auto& alien : aliens)
         alien->render();
+    scoreboard.showScore();
     if (!stats.gameActive)
         playButton.draw();
     window.display();
@@ -222,7 +224,6 @@ void AlienInvasion::checkBulletAlienCollisions()
     if (aliens.empty())
     {
         bullets.clear();
-        std::cout << "Fleet destroyed\n";
         createFleet();
         settings.increaseSpeed();
     }

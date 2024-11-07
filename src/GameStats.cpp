@@ -10,4 +10,5 @@ void GameStats::resetStats()
 {
     shipsLeft = _game->settings.shipLimit;
     gameActive = false;
+    score = 0;
 }

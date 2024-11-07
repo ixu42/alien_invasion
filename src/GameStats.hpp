@@ -9,6 +9,7 @@ class GameStats
 
         unsigned int    shipsLeft;
         bool            gameActive;
+        unsigned int    score;
     
         // initialize the stats that can change during the game
         void resetStats();

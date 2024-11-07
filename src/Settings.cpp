@@ -36,19 +36,10 @@ void Settings::initializeDynamicSettings()
     // 1 represents right, -1 represents left
     fleetDirection = 1;
 }
-#include <iostream>
+
 void Settings::increaseSpeed()
 {
-    std::cout << "Speeding up\n";
-    std::cout << "Ship speed: " << shipSpeed << std::endl;
-    std::cout << "Bullet speed: " << bulletSpeed << std::endl;
-    std::cout << "Alien speed: " << alienSpeed << std::endl;
     shipSpeed *= speedUpScale;
     bulletSpeed *= speedUpScale;
     alienSpeed *= speedUpScale;
-    if (alienSpeed > 4)
-    alienSpeed = 4;
-    std::cout << "Ship speed after: " << shipSpeed << std::endl;
-    std::cout << "Bullet speed after: " << bulletSpeed << std::endl;
-    std::cout << "Alien speed after: " << alienSpeed << std::endl;
 }

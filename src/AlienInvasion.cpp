@@ -10,7 +10,7 @@ AlienInvasion::AlienInvasion()
         throw std::runtime_error("Failed to load alien texture");
 
     ship = std::make_unique<Ship>(this);
-    create_fleet();
+    createFleet();
 }
 
 void AlienInvasion::run()
@@ -36,7 +36,7 @@ void AlienInvasion::processEvents()
             if (event.key.code == sf::Keyboard::Escape)
                 window.close();
             else if (event.key.code == sf::Keyboard::P)
-                stats.gameActive = !stats.gameActive;
+                startGame();
             else if (event.key.code == sf::Keyboard::Left)
                 ship->movingLeft = true;
             else if (event.key.code == sf::Keyboard::Right)
@@ -53,18 +53,24 @@ void AlienInvasion::processEvents()
         }
         else if (event.type == sf::Event::MouseButtonPressed)
         {
-            bool buttonClicked = playButton.button.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y);
-            if (buttonClicked && !stats.gameActive)
-            {
-                stats.resetStats();
-                stats.gameActive = true;
-                aliens.clear();
-                bullets.clear();
-                create_fleet();
-                ship->centerShip();
-                window.setMouseCursorVisible(false);
-            }
+            if (playButton.button.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+                startGame();
         }
+    }
+}
+
+void AlienInvasion::startGame()
+{
+    if (!stats.gameActive)
+    {
+        settings.initializeDynamicSettings();
+        stats.resetStats();
+        stats.gameActive = true;
+        aliens.clear();
+        bullets.clear();
+        createFleet();
+        ship->centerShip();
+        window.setMouseCursorVisible(false);
     }
 }
 
@@ -72,20 +78,10 @@ void AlienInvasion::update()
 {
     ship->update();
     updateBullets();
-    checkFleetEdges();
-    for (auto& alien : aliens)
-        alien->update();
-    
-    // check for collisions between aliens and the ship
-    for (auto& alien : aliens)
-    {
-        if (alien->getGlobalBounds().intersects(ship->sprite.getGlobalBounds()))
-        {
-            std::cout << "Ship hit by alien\n";
-            shipHit();
-            break ;
-        }
-    }
+    updateAliens();
+    // std::cout << "Aliens size: " << aliens.size() << " | positions: ";
+    // for (auto& alien : aliens)
+    //     std::cout << " " << alien->getPosition().x << "\n";
 }
 
 void AlienInvasion::render()
@@ -126,7 +122,26 @@ void AlienInvasion::updateBullets()
     checkBulletAlienCollisions();
 }
 
-void AlienInvasion::create_fleet()
+void AlienInvasion::updateAliens()
+{
+    checkFleetEdges();
+
+    for (auto& alien : aliens)
+        alien->update();
+    
+    // check for collisions between aliens and the ship
+    for (auto& alien : aliens)
+    {
+        if (alien->getGlobalBounds().intersects(ship->sprite.getGlobalBounds()))
+        {
+            std::cout << "Ship hit by alien\n";
+            shipHit();
+            break ;
+        }
+    }
+}
+
+void AlienInvasion::createFleet()
 {
     // create an alien and find the number of aliens that fit in a row
     Alien tempAlien(this);
@@ -197,7 +212,11 @@ void AlienInvasion::checkBulletAlienCollisions()
     if (aliens.empty())
     {
         bullets.clear();
-        create_fleet();
+        std::cout << "Fleet destroyed\n";
+        createFleet();
+        // std::cout << "--------- new fleet created ---------\n";
+        // std::cout << aliens.size() << " aliens in fleet\n";
+        settings.increaseSpeed();
     }
 }
 
@@ -214,7 +233,7 @@ void AlienInvasion::shipHit()
         bullets.clear();
 
         // create a new fleet and center the ship
-        create_fleet();
+        createFleet();
         ship->centerShip();
 
         // pause

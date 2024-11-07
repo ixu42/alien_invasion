@@ -38,14 +38,16 @@ class AlienInvasion
         void update();
         void render();
 
+        void startGame();
+
         // helper functions for handling bullets
         void fireBullet();
         void updateBullets();
 
-        // create the fleet of aliens
-        void create_fleet();
+        void createFleet();
         void checkFleetEdges();
         void changeFleetDirection();
+        void updateAliens();
 
         void checkBulletAlienCollisions();
 

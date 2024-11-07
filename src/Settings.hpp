@@ -27,4 +27,9 @@ class Settings
         float           alienSpeed;
         float           fleetDropSpeed;
         int             fleetDirection;
+
+        float           speedUpScale;
+
+        void initializeDynamicSettings();
+        void increaseSpeed();
 };

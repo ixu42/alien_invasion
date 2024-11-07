@@ -31,23 +31,38 @@ void AlienInvasion::processEvents()
     {
         if (event.type == sf::Event::Closed)
             window.close();        
-        if (event.type == sf::Event::KeyPressed)
+        else if (event.type == sf::Event::KeyPressed)
         {
             if (event.key.code == sf::Keyboard::Escape)
                 window.close();
-            if (event.key.code == sf::Keyboard::Left)
+            else if (event.key.code == sf::Keyboard::P)
+                stats.gameActive = !stats.gameActive;
+            else if (event.key.code == sf::Keyboard::Left)
                 ship->movingLeft = true;
-            if (event.key.code == sf::Keyboard::Right)
+            else if (event.key.code == sf::Keyboard::Right)
                 ship->movingRight = true;
-            if (event.key.code == sf::Keyboard::Space)
+            else if (event.key.code == sf::Keyboard::Space)
                 fireBullet();
         }
-        if (event.type == sf::Event::KeyReleased)
+        else if (event.type == sf::Event::KeyReleased)
         {
             if (event.key.code == sf::Keyboard::Left)
                 ship->movingLeft = false;
-            if (event.key.code == sf::Keyboard::Right)
+            else if (event.key.code == sf::Keyboard::Right)
                 ship->movingRight = false;
+        }
+        else if (event.type == sf::Event::MouseButtonPressed)
+        {
+            bool buttonClicked = playButton.button.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y);
+            if (buttonClicked && !stats.gameActive)
+            {
+                stats.resetStats();
+                stats.gameActive = true;
+                aliens.clear();
+                bullets.clear();
+                create_fleet();
+                ship->centerShip();
+            }
         }
     }
 }

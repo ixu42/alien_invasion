@@ -9,12 +9,12 @@ PlayButton::PlayButton(AlienInvasion* game) : _game(game), _settings(game->setti
     _buttonHeight = 50;
 
     // set up the button
-    _button.setSize(sf::Vector2f(_buttonWidth, _buttonHeight));
-    _button.setPosition((_settings.screenWidth - _buttonWidth) / 2, (_settings.screenHeight - _buttonHeight) / 2);
-    _button.setFillColor(sf::Color(0, 255, 0));
+    button.setSize(sf::Vector2f(_buttonWidth, _buttonHeight));
+    button.setPosition((_settings.screenWidth - _buttonWidth) / 2, (_settings.screenHeight - _buttonHeight) / 2);
+    button.setFillColor(sf::Color(0, 255, 0));
 
-    _button.setOutlineColor(sf::Color(255, 255, 0));
-    _button.setOutlineThickness(5);
+    button.setOutlineColor(sf::Color(255, 255, 0));
+    button.setOutlineThickness(5);
 
     // set up the text
     _buttonText.setFont(_font);
@@ -31,12 +31,12 @@ PlayButton::PlayButton(AlienInvasion* game) : _game(game), _settings(game->setti
     sf::FloatRect textBounds = _buttonText.getLocalBounds();
     _buttonText.setOrigin(textBounds.left + textBounds.width / 2, 
                             textBounds.top + textBounds.height / 2);
-    _buttonText.setPosition(_button.getPosition().x + _buttonWidth / 2, 
-                            _button.getPosition().y + _buttonHeight / 2);
+    _buttonText.setPosition(button.getPosition().x + _buttonWidth / 2, 
+                            button.getPosition().y + _buttonHeight / 2);
 }
 
 void PlayButton::draw()
 {
-    _game->window.draw(_button);
+    _game->window.draw(button);
     _game->window.draw(_buttonText);
 }

@@ -12,7 +12,7 @@ Settings::Settings()
       bulletColor(sf::Color::White),
       bulletMaxCount(5),
       alienSpeed(1),
-      fleetDropSpeed(100),
+      fleetDropSpeed(200),
       fleetDirection(1) // 1 represents right, -1 represents left
 {
 }

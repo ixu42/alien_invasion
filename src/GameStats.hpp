@@ -7,10 +7,11 @@ class GameStats
     public:
         GameStats(AlienInvasion* game);
 
-        int shipsLeft;
+        unsigned int    shipsLeft;
+        bool            gameActive;
     
     private:
-        AlienInvasion* _game;
+        AlienInvasion*  _game;
 
         // initialize the stats that can change during the game
         void resetStats();

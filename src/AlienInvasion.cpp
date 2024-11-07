@@ -17,7 +17,8 @@ void AlienInvasion::run()
     while (window.isOpen())
     {
         processEvents();
-        update();
+        if (stats.gameActive)
+            update();
         render();
     }
 }
@@ -183,20 +184,26 @@ void AlienInvasion::checkBulletAlienCollisions()
 
 void AlienInvasion::shipHit()
 {
-    stats.shipsLeft -= 1;
-    if (stats.shipsLeft == 0)
+    if (stats.shipsLeft > 0)
     {
+        // decrement shipsLeft
+        stats.shipsLeft -= 1;
+        std::cout << "ships left: " << stats.shipsLeft << std::endl;
+
+        // get rid of remaining aliens and bullets
+        aliens.clear();
+        bullets.clear();
+
+        // create a new fleet and center the ship
+        create_fleet();
+        ship->centerShip();
+
+        // pause
+        sf::sleep(sf::seconds(0.5));
+    }
+    else
+    {
+        stats.gameActive = false;
         std::cout << "Game over\n";
     }
-
-    // get rid of remaining aliens and bullets
-    aliens.clear();
-    bullets.clear();
-
-    // create a new fleet and center the ship
-    create_fleet();
-    ship->centerShip();
-
-    // pause
-    sf::sleep(sf::seconds(0.5));
 }

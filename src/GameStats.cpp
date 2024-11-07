@@ -9,4 +9,5 @@ GameStats::GameStats(AlienInvasion* game) : _game(game)
 void GameStats::resetStats()
 {
     shipsLeft = _game->settings.shipLimit;
+    gameActive = true;
 }

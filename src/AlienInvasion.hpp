@@ -3,7 +3,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
+#include <vector>
+#include <utility>
 #include "Settings.hpp"
+#include "GameStats.hpp"
 #include "Ship.hpp"
 #include "Bullet.hpp"
 #include "Alien.hpp"
@@ -20,11 +23,13 @@ class AlienInvasion
 
         sf::RenderWindow window;
         Settings settings;
+        GameStats stats;
         std::unique_ptr<Ship> ship;
         std::vector<Bullet> bullets;
         std::vector<std::unique_ptr<Alien>> aliens;
         
         sf::Texture alienTexture;
+
 
     private:
         void processEvents();
@@ -41,4 +46,6 @@ class AlienInvasion
         void changeFleetDirection();
 
         void checkBulletAlienCollisions();
+
+        void shipHit();
 };

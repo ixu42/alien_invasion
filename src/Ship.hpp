@@ -12,6 +12,7 @@ class Ship
         Ship(AlienInvasion* game);
         void update();
         void render() const;
+        void centerShip();
 
         sf::Sprite sprite;
         bool movingLeft;

@@ -14,6 +14,7 @@ class Settings
 
         // ship settings
         float           shipSpeed;
+        unsigned int    shipLimit;
 
         // bullet settings
         float           bulletSpeed;

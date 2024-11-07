@@ -1,6 +1,6 @@
 #include "AlienInvasion.hpp"
 
-AlienInvasion::AlienInvasion() : settings(Settings())
+AlienInvasion::AlienInvasion() : settings(Settings()), stats(GameStats(this))
 {
     window.create({settings.screenWidth, settings.screenHeight}, "Alien Invasion");
     window.setFramerateLimit(144);
@@ -57,6 +57,17 @@ void AlienInvasion::update()
     checkFleetEdges();
     for (auto& alien : aliens)
         alien->update();
+    
+    // check for collisions between aliens and the ship
+    for (auto& alien : aliens)
+    {
+        if (alien->getGlobalBounds().intersects(ship->sprite.getGlobalBounds()))
+        {
+            std::cout << "Ship hit by alien\n";
+            shipHit();
+            break ;
+        }
+    }
 }
 
 void AlienInvasion::render()
@@ -168,4 +179,24 @@ void AlienInvasion::checkBulletAlienCollisions()
         bullets.clear();
         create_fleet();
     }
+}
+
+void AlienInvasion::shipHit()
+{
+    stats.shipsLeft -= 1;
+    if (stats.shipsLeft == 0)
+    {
+        std::cout << "Game over\n";
+    }
+
+    // get rid of remaining aliens and bullets
+    aliens.clear();
+    bullets.clear();
+
+    // create a new fleet and center the ship
+    create_fleet();
+    ship->centerShip();
+
+    // pause
+    sf::sleep(sf::seconds(0.5));
 }

@@ -6,7 +6,7 @@ Ship::Ship(AlienInvasion* game) : movingLeft(false), movingRight(false), _game(g
         throw std::runtime_error("Error loading texture");
     sprite.setTexture(_shipTexture);
 
-    sprite.setPosition(sf::Vector2f((_game->window.getSize().x - sprite.getGlobalBounds().width) / 2, _game->window.getSize().y - sprite.getGlobalBounds().height));
+    centerShip();
 }
 
 void Ship::update()
@@ -26,4 +26,9 @@ void Ship::update()
 void Ship::render() const
 {
     _game->window.draw(sprite);
+}
+
+void Ship::centerShip()
+{
+    sprite.setPosition(sf::Vector2f((_game->window.getSize().x - sprite.getGlobalBounds().width) / 2, _game->window.getSize().y - sprite.getGlobalBounds().height));
 }

@@ -43,7 +43,10 @@ void AlienInvasion::processEvents()
             else if (event.key.code == sf::Keyboard::Right)
                 ship->movingRight = true;
             else if (event.key.code == sf::Keyboard::Space)
-                fireBullet();
+            {
+                if (stats.gameActive)
+                    fireBullet();
+            }
         }
         else if (event.type == sf::Event::KeyReleased)
         {

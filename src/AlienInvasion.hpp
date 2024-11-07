@@ -39,4 +39,6 @@ class AlienInvasion
         void create_fleet();
         void checkFleetEdges();
         void changeFleetDirection();
+
+        void checkBulletAlienCollisions();
 };

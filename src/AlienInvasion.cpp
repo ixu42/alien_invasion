@@ -92,33 +92,7 @@ void AlienInvasion::updateBullets()
             ++it;
     }
 
-    // detect collisions between bullets and aliens
-    for (auto bulletIter = bullets.begin(); bulletIter != bullets.end();)
-    {
-        bool collided = false;
-        for (auto alienIter = aliens.begin(); alienIter != aliens.end();)
-        {
-            if (bulletIter->getGlobalBounds().intersects((*alienIter)->getGlobalBounds()))
-            {
-                alienIter = aliens.erase(alienIter);
-                if (!collided)
-                    collided = true;
-            }
-            else
-                ++alienIter;
-        }
-        if (collided)
-            bulletIter = bullets.erase(bulletIter);
-        else
-            ++bulletIter;
-    }
-
-    // if the fleet is destroyed, destroy existing bullets and create a new fleet
-    if (aliens.empty())
-    {
-        bullets.clear();
-        create_fleet();
-    }
+    checkBulletAlienCollisions();
 }
 
 void AlienInvasion::create_fleet()
@@ -164,4 +138,34 @@ void AlienInvasion::changeFleetDirection()
     settings.fleetDirection *= -1;
     for (auto& alien : aliens)
         alien->move(0, settings.fleetDropSpeed);
+}
+
+void AlienInvasion::checkBulletAlienCollisions()
+{
+    for (auto bulletIter = bullets.begin(); bulletIter != bullets.end();)
+    {
+        bool collided = false;
+        for (auto alienIter = aliens.begin(); alienIter != aliens.end();)
+        {
+            if (bulletIter->getGlobalBounds().intersects((*alienIter)->getGlobalBounds()))
+            {
+                alienIter = aliens.erase(alienIter);
+                if (!collided)
+                    collided = true;
+            }
+            else
+                ++alienIter;
+        }
+        if (collided)
+            bulletIter = bullets.erase(bulletIter);
+        else
+            ++bulletIter;
+    }
+
+    // if the fleet is destroyed, destroy existing bullets and create a new fleet
+    if (aliens.empty())
+    {
+        bullets.clear();
+        create_fleet();
+    }
 }

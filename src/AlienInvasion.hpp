@@ -44,8 +44,10 @@ class AlienInvasion
         void fireBullet();
         void updateBullets();
 
+        // helper functions for handling aliens
         void createFleet();
         void checkFleetEdges();
+        void checkFleetBottom();
         void changeFleetDirection();
         void updateAliens();
 

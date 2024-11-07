@@ -79,9 +79,6 @@ void AlienInvasion::update()
     ship->update();
     updateBullets();
     updateAliens();
-    // std::cout << "Aliens size: " << aliens.size() << " | positions: ";
-    // for (auto& alien : aliens)
-    //     std::cout << " " << alien->getPosition().x << "\n";
 }
 
 void AlienInvasion::render()
@@ -134,11 +131,12 @@ void AlienInvasion::updateAliens()
     {
         if (alien->getGlobalBounds().intersects(ship->sprite.getGlobalBounds()))
         {
-            std::cout << "Ship hit by alien\n";
             shipHit();
             break ;
         }
     }
+
+    checkFleetBottom();
 }
 
 void AlienInvasion::createFleet()
@@ -186,6 +184,18 @@ void AlienInvasion::changeFleetDirection()
         alien->move(0, settings.fleetDropSpeed);
 }
 
+void AlienInvasion::checkFleetBottom()
+{
+    for (auto& alien : aliens)
+    {
+        if (alien->getPosition().y + alien->getGlobalBounds().height >= settings.screenHeight)
+        {
+            shipHit();
+            break;
+        }
+    }
+}
+
 void AlienInvasion::checkBulletAlienCollisions()
 {
     for (auto bulletIter = bullets.begin(); bulletIter != bullets.end();)
@@ -214,8 +224,6 @@ void AlienInvasion::checkBulletAlienCollisions()
         bullets.clear();
         std::cout << "Fleet destroyed\n";
         createFleet();
-        // std::cout << "--------- new fleet created ---------\n";
-        // std::cout << aliens.size() << " aliens in fleet\n";
         settings.increaseSpeed();
     }
 }

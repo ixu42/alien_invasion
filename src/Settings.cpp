@@ -12,13 +12,13 @@ Settings::Settings()
     shipLimit = 3;
 
     // bullet settings
-    bulletWidth = 1200;
+    bulletWidth = 3;
     bulletHeight = 12;
     bulletColor = sf::Color::White;
     bulletMaxCount = 5;
 
     // alien settings
-    fleetDropSpeed = 200;
+    fleetDropSpeed = 10;
 
     // how quickly the game speeds up
     speedUpScale = 1.1;

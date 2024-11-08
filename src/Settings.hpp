@@ -31,6 +31,9 @@ class Settings
         // how quickly the game speeds up
         float           speedUpScale;
 
+        // how quickly the alien point values increase
+        float           scoreScale;
+
         // scoring
         unsigned int    alienPoints;
 

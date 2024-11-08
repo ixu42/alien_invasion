@@ -2,7 +2,7 @@
 
 Settings::Settings()
 {
-    // initialize the settings that don't change during the game
+    /* initialize the settings that don't change during the game */
     // screen settings
     screenWidth = 1200;
     screenHeight = 800;
@@ -23,6 +23,9 @@ Settings::Settings()
     // how quickly the game speeds up
     speedUpScale = 1.1;
 
+    // how quickly the alien point values increase
+    scoreScale = 1.5;
+
     initializeDynamicSettings();
 }
 
@@ -39,10 +42,12 @@ void Settings::initializeDynamicSettings()
     // scoring
     alienPoints = 10;
 }
-
+#include <iostream>
 void Settings::increaseSpeed()
 {
     shipSpeed *= speedUpScale;
     bulletSpeed *= speedUpScale;
     alienSpeed *= speedUpScale;
+
+    alienPoints = static_cast<unsigned int>(alienPoints * scoreScale);
 }

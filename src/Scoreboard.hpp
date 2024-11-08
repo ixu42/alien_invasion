@@ -2,17 +2,23 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
+#include <memory>
 
 class AlienInvasion;
+class Ship;
 
 class Scoreboard
 {
     public:
         Scoreboard(AlienInvasion* game);
         void updateScore();
-        void showScore();
         void checkHighScore();
         void updateLevel();
+        void updateShipsLeft();
+        void draw();
+
+        std::vector<std::unique_ptr<Ship>> ships;
 
     private:
         AlienInvasion*  _game;

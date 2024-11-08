@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "AlienInvasion.hpp"
-#include <stdexcept>
 
 class AlienInvasion;
 

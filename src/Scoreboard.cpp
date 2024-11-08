@@ -1,5 +1,6 @@
 #include "Scoreboard.hpp"
 #include "AlienInvasion.hpp"
+#include "Ship.hpp"
 
 Scoreboard::Scoreboard(AlienInvasion* game) : _game(game)
 {
@@ -20,6 +21,8 @@ Scoreboard::Scoreboard(AlienInvasion* game) : _game(game)
     _levelText.setCharacterSize(20);
     _levelText.setFillColor(sf::Color::White);
     updateLevel();
+
+    updateShipsLeft();
 }
 
 void Scoreboard::updateScore()
@@ -27,7 +30,7 @@ void Scoreboard::updateScore()
     _scoreText.setString("Score: " + formatWithCommas(_game->stats.score));
 
     // position the score at the top right of the screen
-    _scoreText.setPosition(_game->settings.screenWidth - _scoreText.getLocalBounds().width - 20, 20);
+    _scoreText.setPosition(_game->settings.screenWidth - _scoreText.getLocalBounds().width - 10, 10);
 }
 
 void Scoreboard::updateHighScore()
@@ -37,7 +40,7 @@ void Scoreboard::updateHighScore()
     // position the high score at the top center of the screen
     sf::FloatRect textBounds = _highScoreText.getLocalBounds();
     _highScoreText.setOrigin(textBounds.left + textBounds.width / 2, 0);
-    _highScoreText.setPosition(_game->settings.screenWidth / 2, 20);
+    _highScoreText.setPosition(_game->settings.screenWidth / 2, 10);
 }
 
 std::string Scoreboard::formatWithCommas(unsigned int value)
@@ -54,22 +57,6 @@ std::string Scoreboard::formatWithCommas(unsigned int value)
     return numStr;
 }
 
-void Scoreboard::updateLevel()
-{
-    _levelText.setString("Level: " + std::to_string(_game->stats.level));
-
-    // position the level below the score
-    _levelText.setPosition(_game->settings.screenWidth - _levelText.getLocalBounds().width - 20,
-                            _scoreText.getPosition().y + _scoreText.getLocalBounds().height + 10);
-}
-
-void Scoreboard::showScore()
-{
-    _game->window.draw(_scoreText);
-    _game->window.draw(_highScoreText);
-    _game->window.draw(_levelText);
-}
-
 void Scoreboard::checkHighScore()
 {
     if (_game->stats.score > _game->stats.highScore)
@@ -77,4 +64,36 @@ void Scoreboard::checkHighScore()
         _game->stats.highScore = _game->stats.score;
         updateHighScore();
     }
+}
+
+void Scoreboard::updateLevel()
+{
+    _levelText.setString("Level: " + std::to_string(_game->stats.level));
+
+    // position the level below the score
+    _levelText.setPosition(_game->settings.screenWidth - _levelText.getLocalBounds().width - 10,
+                            _scoreText.getPosition().y + _scoreText.getLocalBounds().height + 10);
+}
+
+void Scoreboard::updateShipsLeft()
+{
+    unsigned int shipsLeft = _game->stats.shipsLeft;
+    ships.clear();
+
+    for (unsigned int i = 0; i < shipsLeft; ++i)
+    {
+        auto ship = std::make_unique<Ship>(_game);
+        ship->sprite.setScale(0.5f, 0.5f);
+        ship->sprite.setPosition(10 + i * ship->sprite.getGlobalBounds().width, 10);
+        ships.push_back(std::move(ship));
+    }
+}
+
+void Scoreboard::draw()
+{
+    _game->window.draw(_scoreText);
+    _game->window.draw(_highScoreText);
+    _game->window.draw(_levelText);
+    for (auto& ship : ships)
+        _game->window.draw(ship->sprite);
 }

@@ -77,6 +77,7 @@ void AlienInvasion::startGame()
         window.setMouseCursorVisible(false);
         scoreboard.updateScore();
         scoreboard.updateLevel();
+        scoreboard.updateShipsLeft();
     }
 }
 
@@ -95,7 +96,7 @@ void AlienInvasion::render()
         bullet.draw();
     for (auto& alien : aliens)
         alien->render();
-    scoreboard.showScore();
+    scoreboard.draw();
     if (!stats.gameActive)
         playButton.draw();
     window.display();
@@ -243,8 +244,9 @@ void AlienInvasion::shipHit()
 {
     if (stats.shipsLeft > 0)
     {
-        // decrement shipsLeft
+        // decrement shipsLeft and update scoreboard
         stats.shipsLeft -= 1;
+        scoreboard.updateShipsLeft();
         std::cout << "ships left: " << stats.shipsLeft << std::endl;
 
         // get rid of remaining aliens and bullets

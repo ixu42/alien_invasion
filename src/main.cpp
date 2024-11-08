@@ -1,6 +1,7 @@
 #include "AlienInvasion.hpp"
 #include <iostream>
 #include <exception>
+#include <stdexcept>
 
 int main()
 {

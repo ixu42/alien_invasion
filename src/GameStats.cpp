@@ -4,6 +4,7 @@
 GameStats::GameStats(AlienInvasion* game) : _game(game)
 {
     resetStats();
+    highScore = 0;
 }
 
 void GameStats::resetStats()

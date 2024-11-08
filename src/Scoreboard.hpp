@@ -11,13 +11,18 @@ class Scoreboard
         Scoreboard(AlienInvasion* game);
         void updateScore();
         void showScore();
+        void checkHighScore();
 
     private:
         AlienInvasion*  _game;
-        unsigned int    _score;
         sf::Font        _font;
+        unsigned int    _score;
         sf::Text        _scoreText;
+        unsigned int    _highScore;
+        sf::Text        _highScoreText;
 
         void updateScoreText();
+        void updateHighScore();
+        void updateHighScoreText();
         std::string formatWithCommas(unsigned int value);
 };

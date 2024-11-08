@@ -216,6 +216,7 @@ void AlienInvasion::checkBulletAlienCollisions()
                     collided = true;
                 stats.score += settings.alienPoints;
                 scoreboard.updateScore();
+                scoreboard.checkHighScore();
             }
             else
                 ++alienIter;

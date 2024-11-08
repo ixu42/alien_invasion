@@ -1,8 +1,7 @@
 #include "Scoreboard.hpp"
 #include "AlienInvasion.hpp"
 
-Scoreboard::Scoreboard(AlienInvasion* game)
-    : _game(game), _score(game->stats.score), _highScore(game->stats.highScore)
+Scoreboard::Scoreboard(AlienInvasion* game) : _game(game)
 {
     if (!_font.loadFromFile("assets/fonts/audiowide.ttf"))
         throw std::runtime_error("Failed to load audiowide font");
@@ -16,36 +15,29 @@ Scoreboard::Scoreboard(AlienInvasion* game)
     _highScoreText.setCharacterSize(20);
     _highScoreText.setFillColor(sf::Color::White);
     updateHighScore();
+
+    _levelText.setFont(_font);
+    _levelText.setCharacterSize(20);
+    _levelText.setFillColor(sf::Color::White);
+    updateLevel();
 }
 
 void Scoreboard::updateScore()
 {
-    _score = _game->stats.score;
-    updateScoreText();
+    _scoreText.setString("Score: " + formatWithCommas(_game->stats.score));
 
-    // display the score at the top right of the screen
+    // position the score at the top right of the screen
     _scoreText.setPosition(_game->settings.screenWidth - _scoreText.getLocalBounds().width - 20, 20);
-}
-
-void Scoreboard::updateScoreText()
-{
-    _scoreText.setString("Score: " + formatWithCommas(_score));
 }
 
 void Scoreboard::updateHighScore()
 {
-    _highScore = _game->stats.highScore;
-    updateHighScoreText();
+    _highScoreText.setString("High Score: " + formatWithCommas(_game->stats.highScore));
 
-    // display the high score at the top center of the screen
+    // position the high score at the top center of the screen
     sf::FloatRect textBounds = _highScoreText.getLocalBounds();
     _highScoreText.setOrigin(textBounds.left + textBounds.width / 2, 0);
     _highScoreText.setPosition(_game->settings.screenWidth / 2, 20);
-}
-
-void Scoreboard::updateHighScoreText()
-{
-    _highScoreText.setString("High Score: " + formatWithCommas(_highScore));
 }
 
 std::string Scoreboard::formatWithCommas(unsigned int value)
@@ -62,10 +54,20 @@ std::string Scoreboard::formatWithCommas(unsigned int value)
     return numStr;
 }
 
+void Scoreboard::updateLevel()
+{
+    _levelText.setString("Level: " + std::to_string(_game->stats.level));
+
+    // position the level below the score
+    _levelText.setPosition(_game->settings.screenWidth - _levelText.getLocalBounds().width - 20,
+                            _scoreText.getPosition().y + _scoreText.getLocalBounds().height + 10);
+}
+
 void Scoreboard::showScore()
 {
     _game->window.draw(_scoreText);
     _game->window.draw(_highScoreText);
+    _game->window.draw(_levelText);
 }
 
 void Scoreboard::checkHighScore()

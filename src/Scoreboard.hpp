@@ -12,17 +12,15 @@ class Scoreboard
         void updateScore();
         void showScore();
         void checkHighScore();
+        void updateLevel();
 
     private:
         AlienInvasion*  _game;
         sf::Font        _font;
-        unsigned int    _score;
         sf::Text        _scoreText;
-        unsigned int    _highScore;
         sf::Text        _highScoreText;
+        sf::Text        _levelText;
 
-        void updateScoreText();
         void updateHighScore();
-        void updateHighScoreText();
         std::string formatWithCommas(unsigned int value);
 };

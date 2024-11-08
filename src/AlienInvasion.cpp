@@ -76,6 +76,7 @@ void AlienInvasion::startGame()
         ship->centerShip();
         window.setMouseCursorVisible(false);
         scoreboard.updateScore();
+        scoreboard.updateLevel();
     }
 }
 
@@ -233,6 +234,8 @@ void AlienInvasion::checkBulletAlienCollisions()
         bullets.clear();
         createFleet();
         settings.increaseSpeed();
+        stats.level += 1;
+        scoreboard.updateLevel();
     }
 }
 

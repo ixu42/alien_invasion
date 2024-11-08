@@ -11,6 +11,7 @@ class GameStats
         bool            gameActive;
         unsigned int    score;
         unsigned int    highScore;
+        unsigned int    level;
     
         // initialize the stats that can change during the game
         void resetStats();

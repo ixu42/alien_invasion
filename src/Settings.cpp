@@ -35,6 +35,9 @@ void Settings::initializeDynamicSettings()
 
     // 1 represents right, -1 represents left
     fleetDirection = 1;
+
+    // scoring
+    alienPoints = 10;
 }
 
 void Settings::increaseSpeed()

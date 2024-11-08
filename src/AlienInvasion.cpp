@@ -75,6 +75,7 @@ void AlienInvasion::startGame()
         createFleet();
         ship->centerShip();
         window.setMouseCursorVisible(false);
+        scoreboard.updateScore();
     }
 }
 
@@ -213,6 +214,8 @@ void AlienInvasion::checkBulletAlienCollisions()
                 alienIter = aliens.erase(alienIter);
                 if (!collided)
                     collided = true;
+                stats.score += settings.alienPoints;
+                scoreboard.updateScore();
             }
             else
                 ++alienIter;

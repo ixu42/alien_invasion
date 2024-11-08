@@ -9,6 +9,7 @@ class Scoreboard
 {
     public:
         Scoreboard(AlienInvasion* game);
+        void updateScore();
         void showScore();
 
     private:

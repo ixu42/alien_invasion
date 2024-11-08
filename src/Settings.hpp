@@ -28,7 +28,11 @@ class Settings
         float           fleetDropSpeed;
         int             fleetDirection;
 
+        // how quickly the game speeds up
         float           speedUpScale;
+
+        // scoring
+        unsigned int    alienPoints;
 
         void initializeDynamicSettings();
         void increaseSpeed();

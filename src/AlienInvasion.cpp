@@ -5,7 +5,7 @@ AlienInvasion::AlienInvasion()
       _scoreboard(Scoreboard(this))
 {
     window.create({settings.screenWidth, settings.screenHeight}, "Alien Invasion");
-    window.setFramerateLimit(144);
+    window.setFramerateLimit(60);
 
     ship = std::make_unique<Ship>(this);
     createFleet();
@@ -15,6 +15,8 @@ void AlienInvasion::run()
 {
     while (window.isOpen())
     {
+        deltaTime = _clock.restart().asSeconds();
+        // std::cout << "deltaTime: " << deltaTime << std::endl;
         processEvents();
         if (stats.gameActive)
             update();

@@ -10,6 +10,9 @@ Settings::Settings()
 
     // ship settings
     shipLimit = 3;
+    shipMaxSpeed = 500; // in pixels per second
+    shipAcceleration = 2000; // in pixels per second^2
+    shipDeceleration = 1200; // in pixels per second^2
 
     // bullet settings
     bulletWidth = 3;
@@ -32,9 +35,8 @@ Settings::Settings()
 void Settings::initializeDynamicSettings()
 {
     // initialize the settings that change during the game
-    shipSpeed = 10;
-    bulletSpeed = 5;
-    alienSpeed = 1;
+    bulletSpeed = 10;
+    alienSpeed = 2;
 
     // 1 represents right, -1 represents left
     fleetDirection = 1;
@@ -42,12 +44,15 @@ void Settings::initializeDynamicSettings()
     // scoring
     alienPoints = 10;
 }
-#include <iostream>
+
+// #include <iostream>
 void Settings::increaseSpeed()
 {
-    shipSpeed *= speedUpScale;
     bulletSpeed *= speedUpScale;
     alienSpeed *= speedUpScale;
+
+    // std::cout << "bulletSpeed: " << bulletSpeed << std::endl;
+    // std::cout << "alienSpeed: " << alienSpeed << std::endl;
 
     alienPoints = static_cast<unsigned int>(alienPoints * scoreScale);
 }

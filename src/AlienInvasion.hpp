@@ -27,6 +27,7 @@ class AlienInvasion
         Settings                settings;
         GameStats               stats;
         std::unique_ptr<Ship>   ship;
+        float                   deltaTime;
 
     private:
         // main game loop functions
@@ -55,4 +56,5 @@ class AlienInvasion
         std::vector<std::unique_ptr<Alien>> _aliens;
         PlayButton                          _playButton;
         Scoreboard                          _scoreboard;
+        sf::Clock                           _clock;
 };

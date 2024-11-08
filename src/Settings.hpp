@@ -15,7 +15,9 @@ class Settings
         sf::Color       bgColor;
 
         // ship settings
-        float           shipSpeed;
+        float           shipMaxSpeed;
+        float           shipAcceleration;
+        float           shipDeceleration;
         unsigned int    shipLimit;
 
         // bullet settings

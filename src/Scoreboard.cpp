@@ -22,7 +22,21 @@ void Scoreboard::updateScore()
 void Scoreboard::updateScoreText()
 {
     _score = _game->stats.score;
-    _scoreText.setString("Score: " + std::to_string(_score));
+    _scoreText.setString("Score: " + formatWithCommas(_score));
+}
+
+std::string Scoreboard::formatWithCommas(unsigned int value)
+{
+    std::string numStr = std::to_string(value);
+    int insertPosition = numStr.length() - 3;
+
+    while (insertPosition > 0)
+    {
+        numStr.insert(insertPosition, ",");
+        insertPosition -= 3;
+    }
+
+    return numStr;
 }
 
 void Scoreboard::showScore()

@@ -19,4 +19,5 @@ class Scoreboard
         sf::Text        _scoreText;
 
         void updateScoreText();
+        std::string formatWithCommas(unsigned int value);
 };

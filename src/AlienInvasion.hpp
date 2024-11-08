@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <memory>
 #include <vector>
 #include <utility>
@@ -24,36 +23,36 @@ class AlienInvasion
         AlienInvasion();
         void run();
 
-        sf::RenderWindow window;
-        Settings settings;
-        GameStats stats;
-        Scoreboard scoreboard;
-        PlayButton playButton;
-        std::unique_ptr<Ship> ship;
-        std::vector<Bullet> bullets;
-        std::vector<std::unique_ptr<Alien>> aliens;
-        
-        sf::Texture alienTexture;
+        sf::RenderWindow        window;
+        Settings                settings;
+        GameStats               stats;
+        std::unique_ptr<Ship>   ship;
 
     private:
+        // main game loop functions
         void processEvents();
         void update();
         void render();
 
+        // helper functions for processEvents() and constructor
         void startGame();
-
-        // helper functions for handling bullets
-        void fireBullet();
-        void updateBullets();
-
-        // helper functions for handling aliens
         void createFleet();
-        void checkFleetEdges();
-        void checkFleetBottom();
-        void changeFleetDirection();
-        void updateAliens();
+        void fireBullet();
 
+        // update bullets and check for collisions between bullets and aliens
+        void updateBullets();
         void checkBulletAlienCollisions();
+        void startNewLevel();
 
+        // update aliens and check for collisions between aliens and ship/bottom of screen
+        void updateAliens();
+        void checkFleetEdges();
+        void changeFleetDirection();
+        void checkFleetBottom();
         void shipHit();
+
+        std::vector<Bullet>                 _bullets;
+        std::vector<std::unique_ptr<Alien>> _aliens;
+        PlayButton                          _playButton;
+        Scoreboard                          _scoreboard;
 };

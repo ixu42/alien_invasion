@@ -13,9 +13,9 @@ class Ship
         void render() const;
         void centerShip();
 
-        sf::Sprite sprite;
-        bool movingLeft;
-        bool movingRight;
+        sf::Sprite      sprite;
+        bool            movingLeft;
+        bool            movingRight;
 
     private:
         AlienInvasion*  _game;

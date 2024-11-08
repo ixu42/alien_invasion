@@ -6,6 +6,8 @@ class Settings
 {
     public:
         Settings();
+        void initializeDynamicSettings();
+        void increaseSpeed();
 
         // screen settings
         unsigned int    screenWidth;
@@ -36,7 +38,4 @@ class Settings
 
         // scoring
         unsigned int    alienPoints;
-
-        void initializeDynamicSettings();
-        void increaseSpeed();
 };

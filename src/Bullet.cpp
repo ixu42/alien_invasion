@@ -2,7 +2,8 @@
 
 Bullet::Bullet(AlienInvasion* game) : _game(game)
 {
-    auto shipMidtopX = _game->ship->sprite.getPosition().x + _game->ship->sprite.getGlobalBounds().width / 2;
+    auto shipMidtopX = _game->ship->sprite.getPosition().x 
+                        + _game->ship->sprite.getGlobalBounds().width / 2;
     auto shipMidtopY = _game->ship->sprite.getPosition().y;
     setPosition(shipMidtopX, shipMidtopY);
     setFillColor(_game->settings.bulletColor);

@@ -3,7 +3,9 @@
 
 GameStats::GameStats(AlienInvasion* game) : _game(game)
 {
+    // initialize the stats that can change during the game
     resetStats();
+
     highScore = 0;
 
     // create the data directory if it doesn't exist

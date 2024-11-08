@@ -21,12 +21,12 @@ class Scoreboard
         std::vector<std::unique_ptr<Ship>> ships;
 
     private:
+        void updateHighScore();
+        std::string formatWithCommas(unsigned int value);
+
         AlienInvasion*  _game;
         sf::Font        _font;
         sf::Text        _scoreText;
         sf::Text        _highScoreText;
         sf::Text        _levelText;
-
-        void updateHighScore();
-        std::string formatWithCommas(unsigned int value);
 };

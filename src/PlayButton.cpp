@@ -12,7 +12,6 @@ PlayButton::PlayButton(AlienInvasion* game) : _game(game), _settings(game->setti
     button.setSize(sf::Vector2f(_buttonWidth, _buttonHeight));
     button.setPosition((_settings.screenWidth - _buttonWidth) / 2, (_settings.screenHeight - _buttonHeight) / 2);
     button.setFillColor(sf::Color(0, 255, 0));
-
     button.setOutlineColor(sf::Color(255, 255, 0));
     button.setOutlineThickness(5);
 

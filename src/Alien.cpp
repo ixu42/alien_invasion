@@ -2,13 +2,15 @@
 
 Alien::Alien(AlienInvasion* game) : _game(game)
 {
-    this->setTexture(_game->alienTexture);
+    if (!_alienTexture.loadFromFile("assets/images/alien.png"))
+        throw std::runtime_error("Failed to load alien texture");
+    this->setTexture(_alienTexture);
     this->setPosition(this->getGlobalBounds().width, this->getGlobalBounds().height);
 }
 
 Alien::Alien(const Alien& other) : _game(other._game)
 {
-    this->setTexture(_game->alienTexture);
+    this->setTexture(_alienTexture);
     this->setPosition(other.getGlobalBounds().width, other.getGlobalBounds().height);
 }
 
@@ -22,7 +24,7 @@ void Alien::render() const
     _game->window.draw(*this);
 }
 
-bool Alien::reachedEdge()
+bool Alien::reachedEdge() const
 {
     if (this->getPosition().x <= 0
         || this->getPosition().x >= _game->settings.screenWidth - this->getGlobalBounds().width)

@@ -2,6 +2,8 @@
 
 A simple 2D game built in C++ using [SFML](https://www.sfml-dev.org/). The player controls a spaceship to defend against waves of alien fleets. Avoid collisions and stop the aliens from reaching the bottom of the screen to survive.
 
+<img src="https://github.com/user-attachments/assets/39bbd99f-de87-4bc4-85e8-1678a6a1c3d4" width="700" alt="gameplay screenshot">
+
 ## Game Instructions
 - **Start Game**: Press `P` or click the "Play" button.
 - **Move the Ship**: Press the left or right arrow keys to accelerate, and release to decelerate.

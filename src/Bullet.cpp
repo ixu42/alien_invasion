@@ -20,7 +20,7 @@ Bullet::Bullet(const Bullet& other) : _game(other._game)
 void Bullet::update()
 {
     // move the bullet up
-    this->move(0, -_game->settings.bulletSpeed);
+    this->move(0, -_game->settings.bulletSpeed * _game->deltaTime);
 }
 
 void Bullet::draw() const

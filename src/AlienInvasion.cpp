@@ -13,13 +13,21 @@ AlienInvasion::AlienInvasion()
 
 void AlienInvasion::run()
 {
+    // int counter = 0;
     while (window.isOpen())
     {
+        // if (counter == 5)
+        //     break;
         deltaTime = _clock.restart().asSeconds();
         // std::cout << "deltaTime: " << deltaTime << std::endl;
+        if (deltaTime > 0.017f)
+            deltaTime = 0.017f;
         processEvents();
         if (stats.gameActive)
+        {
+            // counter++;
             update();
+        }
         render();
     }
 }
@@ -210,9 +218,14 @@ void AlienInvasion::updateAliens()
 
 void AlienInvasion::checkFleetEdges()
 {
-    for (auto& alien : _aliens)
+    // std::cout << "deltaTime: " << deltaTime << std::endl;
+    for (unsigned int i = 0; i < _aliens.size(); ++i)
     {
-        if (alien->reachedEdge())
+        float nextPositionX = _aliens[i]->getPosition().x + settings.alienSpeed * settings.fleetDirection * deltaTime;
+        // std::cout << "alien i: " << i << std::endl;
+        // std::cout << "current position: " << _aliens[i]->getPosition().x << std::endl;
+        // std::cout << "Next position: " << nextPositionX << std::endl;
+        if (nextPositionX <= 0 || nextPositionX >= settings.screenWidth - _aliens[i]->getGlobalBounds().width)
         {
             changeFleetDirection();
             break;

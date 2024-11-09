@@ -24,10 +24,10 @@ Settings::Settings()
     fleetDropSpeed = 10;
 
     // how quickly the game speeds up
-    speedUpScale = 1.1;
+    speedUpScale = 1.1f;
 
     // how quickly the alien point values increase
-    scoreScale = 1.5;
+    scoreScale = 1.5f;
 
     initializeDynamicSettings();
 }
@@ -35,8 +35,8 @@ Settings::Settings()
 void Settings::initializeDynamicSettings()
 {
     // initialize the settings that change during the game
-    bulletSpeed = 10;
-    alienSpeed = 2;
+    bulletSpeed = 500; // in pixels per second
+    alienSpeed = 100; // in pixels per second
 
     // 1 represents right, -1 represents left
     fleetDirection = 1;
@@ -50,9 +50,14 @@ void Settings::increaseSpeed()
 {
     bulletSpeed *= speedUpScale;
     alienSpeed *= speedUpScale;
-
+    if (alienSpeed > 700)
+    {
+        alienSpeed = 700;
+        fleetDropSpeed *= speedUpScale;
+    }
     // std::cout << "bulletSpeed: " << bulletSpeed << std::endl;
     // std::cout << "alienSpeed: " << alienSpeed << std::endl;
+    // std::cout << "fleetDropSpeed: " << fleetDropSpeed << std::endl;
 
     alienPoints = static_cast<unsigned int>(alienPoints * scoreScale);
 }

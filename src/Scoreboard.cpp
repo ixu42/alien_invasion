@@ -4,20 +4,17 @@
 
 Scoreboard::Scoreboard(AlienInvasion* game) : _game(game)
 {
-    if (!_font.loadFromFile("assets/fonts/audiowide.ttf"))
-        throw std::runtime_error("Failed to load audiowide font");
-
-    _scoreText.setFont(_font);
+    _scoreText.setFont(_game->resourceManager.getFont("audiowide"));
     _scoreText.setCharacterSize(20);
     _scoreText.setFillColor(sf::Color::White);
     updateScore();
 
-    _highScoreText.setFont(_font);
+    _highScoreText.setFont(_game->resourceManager.getFont("audiowide"));
     _highScoreText.setCharacterSize(20);
     _highScoreText.setFillColor(sf::Color::White);
     updateHighScore();
 
-    _levelText.setFont(_font);
+    _levelText.setFont(_game->resourceManager.getFont("audiowide"));
     _levelText.setCharacterSize(20);
     _levelText.setFillColor(sf::Color::White);
     updateLevel();

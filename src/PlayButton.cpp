@@ -3,8 +3,6 @@
 
 PlayButton::PlayButton(AlienInvasion* game) : _game(game), _settings(game->settings)
 {
-    if (!_font.loadFromFile("assets/fonts/audiowide.ttf"))
-        throw std::runtime_error("Failed to load audiowide font");
     _buttonWidth = 200;
     _buttonHeight = 50;
 
@@ -16,7 +14,7 @@ PlayButton::PlayButton(AlienInvasion* game) : _game(game), _settings(game->setti
     button.setOutlineThickness(5);
 
     // set up the text
-    _buttonText.setFont(_font);
+    _buttonText.setFont(_game->resourceManager.getFont("audiowide"));
     _buttonText.setString("Play");
     _buttonText.setCharacterSize(32);
     _buttonText.setFillColor(sf::Color::White);

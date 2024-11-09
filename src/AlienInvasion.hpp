@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <utility>
+#include "ResourceManager.hpp" 
 #include "Settings.hpp"
 #include "GameStats.hpp"
 #include "Scoreboard.hpp"
@@ -15,7 +16,6 @@
 class Ship;
 class Bullet;
 class Alien;
-class PlayButton;
 
 class AlienInvasion
 {
@@ -24,6 +24,7 @@ class AlienInvasion
         void run();
 
         sf::RenderWindow        window;
+        ResourceManager         resourceManager;
         Settings                settings;
         GameStats               stats;
         std::unique_ptr<Ship>   ship;
@@ -54,7 +55,7 @@ class AlienInvasion
 
         std::vector<Bullet>                 _bullets;
         std::vector<std::unique_ptr<Alien>> _aliens;
-        PlayButton                          _playButton;
-        Scoreboard                          _scoreboard;
+        std::unique_ptr<PlayButton>         _playButton;
+        std::unique_ptr<Scoreboard>         _scoreboard;
         sf::Clock                           _clock;
 };

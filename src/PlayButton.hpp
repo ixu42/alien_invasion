@@ -20,5 +20,4 @@ class PlayButton
         float               _buttonWidth;
         float               _buttonHeight;
         sf::Text            _buttonText;
-        sf::Font            _font;
 };

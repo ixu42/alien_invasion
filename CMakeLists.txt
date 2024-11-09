@@ -26,7 +26,8 @@ add_executable(alien_invasion
     src/Settings.cpp
     src/GameStats.cpp
     src/PlayButton.cpp
-    src/Scoreboard.cpp)
+    src/Scoreboard.cpp
+    src/ResourceManager.cpp)
 target_link_libraries(alien_invasion PRIVATE sfml-graphics)
 
 target_compile_features(alien_invasion PRIVATE cxx_std_17)

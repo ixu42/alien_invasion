@@ -1,33 +1,30 @@
 #include "AlienInvasion.hpp"
 
 AlienInvasion::AlienInvasion() 
-    : settings(Settings()), stats(GameStats(this)), _playButton(PlayButton(this)),
-      _scoreboard(Scoreboard(this))
+    : settings(Settings()), stats(GameStats(this))
 {
     window.create({settings.screenWidth, settings.screenHeight}, "Alien Invasion");
     window.setFramerateLimit(60);
 
+    // initialize ui components
+    _playButton = std::make_unique<PlayButton>(this);
+    _scoreboard = std::make_unique<Scoreboard>(this);
+
+    // initialize game objects
     ship = std::make_unique<Ship>(this);
     createFleet();
 }
 
 void AlienInvasion::run()
 {
-    // int counter = 0;
     while (window.isOpen())
     {
-        // if (counter == 5)
-        //     break;
         deltaTime = _clock.restart().asSeconds();
-        // std::cout << "deltaTime: " << deltaTime << std::endl;
         if (deltaTime > 0.017f)
             deltaTime = 0.017f;
         processEvents();
         if (stats.gameActive)
-        {
-            // counter++;
             update();
-        }
         render();
     }
 }
@@ -61,7 +58,7 @@ void AlienInvasion::processEvents()
         }
         else if (event.type == sf::Event::MouseButtonPressed)
         {
-            if (_playButton.button.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+            if (_playButton->button.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
                 startGame();
         }
     }
@@ -82,9 +79,9 @@ void AlienInvasion::render()
         bullet.draw();
     for (auto& alien : _aliens)
         alien->render();
-    _scoreboard.draw();
+    _scoreboard->draw();
     if (!stats.gameActive)
-        _playButton.draw();
+        _playButton->draw();
     window.display();
 }
 
@@ -100,9 +97,9 @@ void AlienInvasion::startGame()
         createFleet();
         ship->centerShip();
         window.setMouseCursorVisible(false);
-        _scoreboard.updateScore();
-        _scoreboard.updateLevel();
-        _scoreboard.updateShipsLeft();
+        _scoreboard->updateScore();
+        _scoreboard->updateLevel();
+        _scoreboard->updateShipsLeft();
     }
 }
 
@@ -170,8 +167,8 @@ void AlienInvasion::checkBulletAlienCollisions()
                 if (!collided)
                     collided = true;
                 stats.score += settings.alienPoints;
-                _scoreboard.updateScore();
-                _scoreboard.checkHighScore();
+                _scoreboard->updateScore();
+                _scoreboard->checkHighScore();
             }
             else
                 ++alienIter;
@@ -193,7 +190,7 @@ void AlienInvasion::startNewLevel()
     createFleet();
     settings.increaseSpeed();
     stats.level += 1;
-    _scoreboard.updateLevel();
+    _scoreboard->updateLevel();
 }
 
 void AlienInvasion::updateAliens()
@@ -222,9 +219,6 @@ void AlienInvasion::checkFleetEdges()
     for (unsigned int i = 0; i < _aliens.size(); ++i)
     {
         float nextPositionX = _aliens[i]->getPosition().x + settings.alienSpeed * settings.fleetDirection * deltaTime;
-        // std::cout << "alien i: " << i << std::endl;
-        // std::cout << "current position: " << _aliens[i]->getPosition().x << std::endl;
-        // std::cout << "Next position: " << nextPositionX << std::endl;
         if (nextPositionX <= 0 || nextPositionX >= settings.screenWidth - _aliens[i]->getGlobalBounds().width)
         {
             changeFleetDirection();
@@ -258,7 +252,7 @@ void AlienInvasion::shipHit()
     {
         // decrement shipsLeft and update scoreboard
         stats.shipsLeft -= 1;
-        _scoreboard.updateShipsLeft();
+        _scoreboard->updateShipsLeft();
 
         // get rid of remaining aliens and bullets
         _aliens.clear();

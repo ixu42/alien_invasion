@@ -25,7 +25,6 @@ class Scoreboard
         std::string formatWithCommas(unsigned int value);
 
         AlienInvasion*  _game;
-        sf::Font        _font;
         sf::Text        _scoreText;
         sf::Text        _highScoreText;
         sf::Text        _levelText;

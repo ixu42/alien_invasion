@@ -15,5 +15,4 @@ class Alien : public sf::Sprite
     
     private:
         AlienInvasion*  _game;
-        sf::Texture     _alienTexture;
 };

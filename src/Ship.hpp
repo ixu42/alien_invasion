@@ -23,6 +23,5 @@ class Ship
         void applyDeceleration();
 
         AlienInvasion*  _game;
-        sf::Texture     _shipTexture;
         sf::Vector2f    _velocity;
 };

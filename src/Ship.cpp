@@ -60,7 +60,7 @@ void Ship::render() const
 
 void Ship::centerShip()
 {
-    float xPos = (_game->window.getSize().x - sprite.getGlobalBounds().width) / 2;
-    float yPos = _game->window.getSize().y - sprite.getGlobalBounds().height;
+    float xPos = (_game->settings.screenWidth - sprite.getGlobalBounds().width) / 2;
+    float yPos = _game->settings.screenHeight - sprite.getGlobalBounds().height;
     sprite.setPosition(sf::Vector2f(xPos, yPos));
 }

@@ -58,7 +58,9 @@ void AlienInvasion::processEvents()
         }
         else if (event.type == sf::Event::MouseButtonPressed)
         {
-            if (_playButton->button.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+            sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+            if (_playButton->button.getGlobalBounds().contains(worldPos.x, worldPos.y))
                 startGame();
         }
     }

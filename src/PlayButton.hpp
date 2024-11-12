@@ -12,11 +12,12 @@ class PlayButton
         PlayButton(AlienInvasion* game);
         void draw();
 
-        sf::RectangleShape  button;
+        sf::RectangleShape& getButton() { return _button; }
 
     private:
         AlienInvasion*      _game;
         Settings            _settings;
+        sf::RectangleShape  _button;
         float               _buttonWidth;
         float               _buttonHeight;
         sf::Text            _buttonText;

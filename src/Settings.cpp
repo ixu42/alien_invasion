@@ -55,9 +55,6 @@ void Settings::increaseSpeed()
         alienSpeed = 700;
         fleetDropSpeed *= speedUpScale;
     }
-    // std::cout << "bulletSpeed: " << bulletSpeed << std::endl;
-    // std::cout << "alienSpeed: " << alienSpeed << std::endl;
-    // std::cout << "fleetDropSpeed: " << fleetDropSpeed << std::endl;
 
     alienPoints = static_cast<unsigned int>(alienPoints * scoreScale);
 }

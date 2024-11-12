@@ -23,12 +23,13 @@ class AlienInvasion
         AlienInvasion();
         void run();
 
-        sf::RenderWindow        window;
-        ResourceManager         resourceManager;
-        Settings                settings;
-        GameStats               stats;
-        std::unique_ptr<Ship>   ship;
-        float                   deltaTime;
+        // getters
+        sf::RenderWindow& getWindow() { return _window; }
+        ResourceManager& getResourceManager() { return _resourceManager; }
+        Settings& getSettings() { return _settings; }
+        GameStats& getStats() { return _stats; }
+        Ship& getShip() { return *_ship; }
+        float getDeltaTime() { return _deltaTime; }
 
     private:
         // main game loop functions
@@ -53,9 +54,15 @@ class AlienInvasion
         void checkFleetBottom();
         void shipHit();
 
-        std::vector<Bullet>                 _bullets;
-        std::vector<std::unique_ptr<Alien>> _aliens;
+        sf::RenderWindow                    _window;
+        ResourceManager                     _resourceManager;
+        Settings                            _settings;
+        GameStats                           _stats;
+        sf::Clock                           _clock;
+        float                               _deltaTime;
         std::unique_ptr<PlayButton>         _playButton;
         std::unique_ptr<Scoreboard>         _scoreboard;
-        sf::Clock                           _clock;
+        std::unique_ptr<Ship>               _ship;
+        std::vector<Bullet>                 _bullets;
+        std::vector<std::unique_ptr<Alien>> _aliens;
 };

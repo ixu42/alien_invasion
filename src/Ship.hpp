@@ -24,4 +24,5 @@ class Ship
 
         AlienInvasion*  _game;
         sf::Vector2f    _velocity;
+        Settings        _settings;
 };

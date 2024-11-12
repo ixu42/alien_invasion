@@ -6,7 +6,7 @@ GameStats::GameStats(AlienInvasion* game) : _game(game)
     // initialize the stats that can change during the game
     resetStats();
 
-    highScore = 0;
+    _highScore = 0;
 
     // create the data directory if it doesn't exist
     try
@@ -31,10 +31,10 @@ GameStats::~GameStats()
 
 void GameStats::resetStats()
 {
-    shipsLeft = _game->settings.shipLimit;
-    gameActive = false;
-    score = 0;
-    level = 1;
+    _shipsLeft = _game->getSettings().shipLimit;
+    _gameActive = false;
+    _score = 0;
+    _level = 1;
 }
 
 void GameStats::loadHighScore()
@@ -45,7 +45,7 @@ void GameStats::loadHighScore()
     std::ifstream infile(_highScoreFilePath);
     if (infile.is_open())
     {
-        infile >> highScore;
+        infile >> _highScore;
         infile.close();
     }
     else
@@ -57,7 +57,7 @@ void GameStats::saveHighScore()
 {
     std::ofstream outfile(_highScoreFilePath);
     if (outfile.is_open())
-        outfile << highScore;
+        outfile << _highScore;
     else
         std::cerr << "Failed to open file for writing: " 
             << _highScoreFilePath << "\n";
